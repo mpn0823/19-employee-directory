@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Context from "../utils/Context";
 
 const Form = (props) => {
-    const state = useContext(Context);
+    useContext(Context);
     return (
         <form
             onSubmit={(event) => event.preventDefault()}
