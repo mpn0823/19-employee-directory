@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import employees from "./employees.json";
 import { v4 as uuid } from "uuid";
 
 // Components
 import Form from "./components/Form";
 import Card from "./components/Card";
-
-// Utilities
-import Context from "./utils/Context";
 
 const App = () => {
     const [state, setState] = useState({
@@ -28,7 +25,7 @@ const App = () => {
         a.location.country.localeCompare(b.location.country);
 
     return (
-        <Context.Provider value={null}>
+        <Fragment>
             <Form handleInput={handleInput} />
             <div className="container">
                 <div className="row">
@@ -50,7 +47,7 @@ const App = () => {
                         ))}
                 </div>
             </div>
-        </Context.Provider>
+        </Fragment>
     );
 };
 

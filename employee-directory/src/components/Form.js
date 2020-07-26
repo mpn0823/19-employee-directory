@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import Context from "../utils/Context";
+import React from "react";
 
 const Form = (props) => {
-    useContext(Context);
     return (
         <form
             onSubmit={(event) => event.preventDefault()}
