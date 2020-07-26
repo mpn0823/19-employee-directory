@@ -1,23 +1,48 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import results from "./employees.json";
-import EmployeeCard from "./components/EmployeeCard";
+import { v4 as uuid } from "uuid";
 
 const App = () => {
-    const [state, setState] = useState(results);
+    // Define the state
+    const [state, setState] = useState({
+        master: results,
+        viewable: results,
+    });
+    // Create context wrapper
+    const Context = React.createContext({
+        master: [],
+        viewable: [],
+    });
+
+    // EventHandler
+    const handleFilter = (event) => {
+        const newViewable = state.master.filter(
+            (x) => x.location.country === event.target.value
+        );
+        setState({
+            ...state,
+            viewable: newViewable,
+        });
+    };
+
+    // const handleSortOrder = () =>
 
     return (
-        <Fragment>
-            {state.results.map((employee) => (
-                <EmployeeCard
-                    image={employee.picture.large}
-                    firstName={employee.name.first}
-                    lastName={employee.name.last}
-                    email={employee.email}
-                    phone={employee.phone}
-                    cell={employee.cell}
-                />
+        <div className="row">
+            {state.viewable.map((employee) => (
+                <div className="col-sm" key={uuid()}>
+                    <EmployeeCard
+                        image={employee.picture.large}
+                        firstName={employee.name.first}
+                        lastName={employee.name.last}
+                        location={employee.location}
+                        email={employee.email}
+                        phone={employee.phone}
+                        cell={employee.cell}
+                    />
+                </div>
             ))}
-        </Fragment>
+        </div>
     );
 };
 
